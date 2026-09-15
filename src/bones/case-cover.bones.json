@@ -1,0 +1,74 @@
+{
+  "breakpoints": {
+    "375": {
+      "name": "case-cover",
+      "viewportWidth": 343,
+      "width": 343,
+      "height": 214,
+      "bones": [
+        [
+          0,
+          0,
+          100,
+          214,
+          24,
+          true
+        ],
+        [
+          0.2915,
+          -29,
+          99.4169,
+          246,
+          8
+        ]
+      ]
+    },
+    "768": {
+      "name": "case-cover",
+      "viewportWidth": 707,
+      "width": 707,
+      "height": 353,
+      "bones": [
+        [
+          0,
+          0,
+          100,
+          353,
+          24,
+          true
+        ],
+        [
+          0.1415,
+          -46,
+          99.7169,
+          407,
+          8
+        ]
+      ]
+    },
+    "1280": {
+      "name": "case-cover",
+      "viewportWidth": 1184,
+      "width": 1184,
+      "height": 592,
+      "bones": [
+        [
+          0,
+          0,
+          100,
+          592,
+          24,
+          true
+        ],
+        [
+          0.0845,
+          -81,
+          99.8311,
+          684,
+          8
+        ]
+      ]
+    }
+  },
+  "_hash": "003ef0c2ac2ffcf221e4ee2e5fa6f252"
+}
