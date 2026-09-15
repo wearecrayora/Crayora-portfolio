@@ -8,6 +8,7 @@ import { TransitionLink } from "@/components/ui/transition-link";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { ServiceVisual } from "./service-visuals";
 import { cn } from "@/lib/cn";
+import { fitHeading } from "@/lib/fit-heading";
 
 // Four distinct surfaces on the light canvas; the indigo card is the single colour block.
 const surfaces = [
@@ -97,7 +98,9 @@ export function ServicesStack() {
         </SplitReveal>
       </div>
 
-      <div className="shell flex flex-col gap-6 [perspective:1200px] lg:gap-0">
+      {/* No perspective/transform here: it would become the containing block for the
+          pinned (position: fixed) cards and they would scroll away. Mobile tilt uses transformPerspective. */}
+      <div className="shell flex flex-col gap-6 lg:gap-0">
         {services.map((service, i) => (
           <article
             key={service.key}
@@ -114,8 +117,13 @@ export function ServicesStack() {
                 surfaces[i],
               )}
             >
-              <div className="flex flex-col gap-6">
-                <h3 id={`service-${service.key}`} className={cn("display-md", i === 1 ? "text-white" : "text-ink")}>
+              {/* @container + fitHeading: the title is sized to this half-width column, not the viewport. */}
+              <div className="@container flex min-w-0 flex-col gap-6">
+                <h3
+                  id={`service-${service.key}`}
+                  className={cn("display-md", i === 1 ? "text-white" : "text-ink")}
+                  style={{ fontSize: fitHeading(service.title, "clamp(2rem, 4.2vw, 4rem)") }}
+                >
                   {service.title}
                 </h3>
                 <p className={cn("max-w-[42ch] text-lg leading-relaxed", i === 1 ? "text-white/85" : "text-mute")}>

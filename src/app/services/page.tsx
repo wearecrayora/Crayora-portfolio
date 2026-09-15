@@ -6,6 +6,7 @@ import { TransitionLink } from "@/components/ui/transition-link";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { CtaBlock } from "@/components/home/cta-block";
+import { fitHeading } from "@/lib/fit-heading";
 
 export const metadata = pageMetadata({
   title: "Web, App, Social Media & Software Services",
@@ -47,9 +48,14 @@ export default function ServicesPage() {
                 href={`/services/${s.slug}`}
                 className="group grid gap-6 py-10 md:grid-cols-12 md:items-center md:gap-10 md:py-14"
               >
-                <h2 className="display-md transition-transform duration-500 ease-[var(--ease-crayora)] group-hover:translate-x-3 md:col-span-6">
-                  {s.name}
-                </h2>
+                <div className="@container min-w-0 md:col-span-6">
+                  <h2
+                    className="display-md transition-transform duration-500 ease-[var(--ease-crayora)] group-hover:translate-x-3"
+                    style={{ fontSize: fitHeading(s.name, "clamp(2rem, 4.2vw, 4rem)") }}
+                  >
+                    {s.name}
+                  </h2>
+                </div>
                 <div className="md:col-span-5">
                   <p className="text-lg leading-relaxed text-mute">{s.pitch}</p>
                   <ul className="mt-5 flex flex-wrap gap-2">

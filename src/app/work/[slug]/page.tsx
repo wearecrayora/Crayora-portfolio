@@ -177,9 +177,13 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           sizes="100vw"
           className="object-cover object-top opacity-0 transition-opacity duration-700 group-hover:opacity-25"
         />
-        <div className="shell relative">
+        <div className="@container shell relative">
           <span className="mono-label">Next project</span>
-          <span className="display-lg mt-4 flex items-center gap-6">
+          {/* The trailing W reserves room for the arrow beside the last word. */}
+          <span
+            className="display-lg mt-4 flex items-center gap-6"
+            style={{ fontSize: fitHeading(`${next.title}W`, "clamp(2.5rem, 6.4vw, 6.25rem)") }}
+          >
             {next.title}
             <ArrowUpRight weight="bold" className="size-12 shrink-0 text-indigo transition-transform duration-500 group-hover:rotate-45 md:size-20" />
           </span>
