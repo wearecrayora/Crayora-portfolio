@@ -7,7 +7,7 @@ import _case_cover from './case-cover.bones.json'
 import _project_card from './project-card.bones.json'
 import _project_card_large from './project-card-large.bones.json'
 
-configureBoneyard({"color":"#e9e2d8","darkColor":"#e9e2d8","animate":"shimmer","shimmerColor":"#f5f0e8","darkShimmerColor":"#f5f0e8","speed":"1.6s","transition":400,"stagger":40})
+configureBoneyard({"color":"#e9e2d8","darkColor":"#e9e2d8","animate":"shimmer","shimmerColor":"#f5f0e8","darkShimmerColor":"#f5f0e8","speed":"1.6s","stagger":40,"transition":400})
 
 registerBones({
   "case-cover": _case_cover,

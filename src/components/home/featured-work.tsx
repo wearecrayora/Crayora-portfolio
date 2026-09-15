@@ -7,6 +7,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { featuredProjects, projects } from "@/data/projects";
 import { countryByCode } from "@/data/countries";
 import { TransitionLink } from "@/components/ui/transition-link";
+import { fitHeading } from "@/lib/fit-heading";
 
 /**
  * Horizontal reel: the section pins and vertical scroll pans the track, on every
@@ -55,18 +56,22 @@ export function FeaturedWork() {
           },
         });
 
-        gsap.utils.toArray<HTMLElement>("[data-reel-img]", t).forEach((img) => {
+        // Each card tilts up into place as it slides in. The screenshot itself is never
+        // scaled or cropped, so the whole site is always visible in its frame.
+        gsap.utils.toArray<HTMLElement>("[data-reel-card]", t).forEach((card) => {
           gsap.fromTo(
-            img,
-            { xPercent: -8 },
+            card,
+            { scale: 0.86, rotate: 3, autoAlpha: 0.55 },
             {
-              xPercent: 8,
+              scale: 1,
+              rotate: 0,
+              autoAlpha: 1,
               ease: "none",
               scrollTrigger: {
-                trigger: img.parentElement,
+                trigger: card,
                 containerAnimation: pan,
                 start: "left right",
-                end: "right left",
+                end: "center 60%",
                 scrub: true,
               },
             },
@@ -84,8 +89,9 @@ export function FeaturedWork() {
         ref={track}
         className="flex h-[100svh] items-center gap-5 px-4 md:gap-8 md:px-[4vw] motion-reduce:h-auto motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:scroll-px-4 motion-reduce:overflow-x-auto motion-reduce:pb-16"
       >
-        <div className="flex w-[80vw] shrink-0 snap-start flex-col justify-center gap-6 md:w-[52vw] lg:w-[34vw]">
-          <h2 id="featured-title" className="display-lg">
+        <div className="@container flex w-[80vw] shrink-0 snap-start flex-col justify-center gap-6 md:w-[52vw] lg:w-[34vw]">
+          {/* Sized to this panel, not the viewport, so "Selected" never runs into the first card. */}
+          <h2 id="featured-title" className="display-lg" style={{ fontSize: fitHeading("Selected", "clamp(2.5rem, 6.4vw, 6.25rem)") }}>
             Selected <span className="text-outline">work</span>
           </h2>
           <p className="max-w-[34ch] text-lg text-mute">
@@ -98,17 +104,21 @@ export function FeaturedWork() {
           return (
             <TransitionLink
               key={project.slug}
+              data-reel-card
               href={`/work/${project.slug}`}
               className="group relative flex w-[82vw] shrink-0 snap-start flex-col gap-4 md:w-[64vw] lg:w-[46vw]"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-panel)] border border-line bg-surface-2 shadow-[var(--shadow-card)]">
+              {/* The frame takes the screenshot's own proportions, so the full image shows uncropped. */}
+              <div
+                className="relative overflow-hidden rounded-[var(--radius-panel)] border border-line bg-surface-2 shadow-[var(--shadow-card)] transition-[translate,box-shadow] duration-500 ease-[var(--ease-crayora)] group-hover:-translate-y-1.5 group-hover:shadow-[var(--shadow-lift)]"
+                style={{ aspectRatio: `${project.image.width} / ${project.image.height}` }}
+              >
                 <Image
-                  data-reel-img
                   src={project.image.src}
                   alt={`${project.title} website`}
                   fill
                   sizes="(min-width: 1024px) 46vw, (min-width: 768px) 64vw, 82vw"
-                  className="scale-[1.18] object-cover object-top transition-[scale] duration-700 ease-[var(--ease-crayora)] group-hover:scale-[1.24]"
+                  className="object-cover"
                 />
                 <span className="absolute right-4 top-4 grid size-12 place-items-center rounded-full bg-ink text-canvas opacity-0 transition-all duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
                   <ArrowUpRight weight="bold" className="size-5" />

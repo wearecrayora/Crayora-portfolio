@@ -26,15 +26,15 @@ export function CaseCover({ project }: { project: Project }) {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const frame = root.current!.querySelector("[data-frame]");
-        const img = root.current!.querySelector("[data-img]");
         gsap.set(frame, { clipPath: "inset(18% 6% 0% 6% round 24px)" });
         const stop = onIntroDone(() =>
           gsap.to(frame, { clipPath: "inset(0% 0% 0% 0% round 24px)", duration: 1.6, ease: "crayora", delay: 0.2 }),
         );
+        // Depth without cropping: the whole frame drifts and settles, the image is never scaled.
         gsap.fromTo(
-          img,
-          { yPercent: -6 },
-          { yPercent: 6, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true } },
+          frame,
+          { y: 60, scale: 0.96 },
+          { y: 0, scale: 1, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "top 30%", scrub: true } },
         );
         return stop;
       });
@@ -44,19 +44,22 @@ export function CaseCover({ project }: { project: Project }) {
   );
 
   const cover = (
-    <div data-frame className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-panel)] border border-line bg-surface-2 shadow-[var(--shadow-card)] md:aspect-[2/1]">
-      <div data-img className="absolute -inset-y-[8%] inset-x-0">
-        <Image
-          src={project.image.src}
-          alt={`${project.title} website designed and built by Crayora`}
-          fill
-          priority
-          sizes="(min-width: 1440px) 1344px, 100vw"
-          quality={90}
-          onLoad={() => setLoaded(true)}
-          className="object-cover object-top"
-        />
-      </div>
+    // The frame takes the screenshot's own proportions, so the full site is visible.
+    <div
+      data-frame
+      className="relative overflow-hidden rounded-[var(--radius-panel)] border border-line bg-surface-2 shadow-[var(--shadow-card)]"
+      style={{ aspectRatio: `${project.image.width} / ${project.image.height}` }}
+    >
+      <Image
+        src={project.image.src}
+        alt={`${project.title} website designed and built by Crayora`}
+        fill
+        priority
+        sizes="(min-width: 1440px) 1344px, 100vw"
+        quality={90}
+        onLoad={() => setLoaded(true)}
+        className="object-cover"
+      />
     </div>
   );
 
