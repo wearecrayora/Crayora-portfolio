@@ -92,8 +92,11 @@ export function Hero() {
         </p>
 
         <div data-parallax className="relative">
-          <SplitReveal as="h1" id="hero-title" by="chars" onIntro className="display-xl max-w-[16ch] text-ink">
-            We colour <span className="text-outline">outside</span> the lines.
+          {/* Company tagline. Tablet and up: one clause per line. Phones: "dream it," and
+              "code it." stay together (nowrap) so the words never orphan. */}
+          <SplitReveal as="h1" id="hero-title" by="chars" onIntro className="display-xl !text-[clamp(3rem,8.2vw,9rem)] text-ink">
+            You <span className="whitespace-nowrap"><span className="text-outline">dream</span> it,</span>
+            <br className="hidden md:inline" /> we <span className="whitespace-nowrap"><span className="text-indigo">code</span> it.</span>
           </SplitReveal>
         </div>
 

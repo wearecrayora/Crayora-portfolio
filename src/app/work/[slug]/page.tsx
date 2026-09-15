@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
     description: project.summary,
     path: `/work/${project.slug}`,
     type: "article",
+    image: { url: `/work/${project.slug}/opengraph-image`, width: 1200, height: 630, alt: `${project.title} by Crayora` },
   });
 }
 

@@ -4,7 +4,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://crayoratech.com";
 export const site = {
   name: "Crayora",
   legalName: "Crayora",
-  tagline: "We colour outside the lines.",
+  tagline: "You dream it, we code it.",
   description:
     "Crayora is a web, app and social media studio in Odisha, India. We build websites, Android and iOS apps and custom software, and run social media for brands.",
   url: siteUrl.replace(/\/$/, ""),

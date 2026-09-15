@@ -2,11 +2,12 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { widestWordEm } from "./fit-heading";
+import { widestWordEm, wordWidthEm } from "./fit-heading";
 
 /**
- * Branded 1200x630 share images (Open Graph + X fallback), rendered at build
- * time with Satori. Same world as the site: warm ivory, violet aurora, glass.
+ * Case study share images (1200x630), rendered at build time with Satori: warm ivory,
+ * violet aurora and the project screenshot in a glass frame. Every other page uses the
+ * logo image in src/app/opengraph-image.png.
  */
 
 const INK = "#0c1229";
@@ -36,8 +37,16 @@ type OgInput = {
   screenshot?: { slug: string; width: number; height: number };
 };
 
-/** Largest size (px) that keeps the longest word of the title on one line. */
+/**
+ * Largest size (px) that fits the title. A title with explicit "\n" breaks keeps
+ * each line whole; otherwise only the longest word has to fit on a line.
+ */
 function titleSize(title: string, width: number) {
+  const lines = title.split("\n");
+  if (lines.length > 1) {
+    const lineEm = (line: string) => line.split(/\s+/).reduce((em, w) => em + wordWidthEm(w) + 0.28, -0.28);
+    return Math.min(96, Math.floor(width / (Math.max(...lines.map(lineEm)) * 1.06)));
+  }
   const cap = title.length > 26 ? 66 : title.length > 14 ? 80 : 96;
   return Math.min(cap, Math.floor(width / (widestWordEm(title) * 1.06)));
 }
@@ -88,7 +97,11 @@ export async function renderOg({ eyebrow, title, subtitle, screenshot }: OgInput
             <div style={{ display: "flex", alignSelf: "flex-start", padding: "9px 18px", borderRadius: 9999, ...glass, boxShadow: "none", fontFamily: "Geist Mono", fontSize: 17, letterSpacing: 2, color: INDIGO, textTransform: "uppercase" }}>
               {eyebrow}
             </div>
-            <div style={{ marginTop: 26, fontFamily: "Syne", fontWeight: 800, fontSize: size, lineHeight: 1, letterSpacing: -size * 0.04, color: INK }}>{title}</div>
+            <div style={{ display: "flex", flexDirection: "column", marginTop: 26, fontFamily: "Syne", fontWeight: 800, fontSize: size, lineHeight: 1, letterSpacing: -size * 0.04, color: INK }}>
+              {title.split("\n").map((line) => (
+                <div key={line}>{line}</div>
+              ))}
+            </div>
             {subtitle ? <div style={{ marginTop: 22, fontSize: 26, lineHeight: 1.4, color: MUTE }}>{subtitle}</div> : null}
           </div>
           <div style={{ display: "flex", alignItems: "center", fontSize: 22, color: INK }}>

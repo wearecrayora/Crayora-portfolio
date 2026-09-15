@@ -10,7 +10,7 @@ import { ContactDock } from "@/components/widgets/contact-dock";
 import { ScrollProgress } from "@/components/widgets/scroll-progress";
 import { site } from "@/data/site";
 import { services } from "@/data/services";
-import { absoluteUrl, organizationId } from "@/lib/seo";
+import { absoluteUrl, logoShareImage, organizationId } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
@@ -49,11 +49,13 @@ export const metadata: Metadata = {
     title: "Crayora | Website, App & Social Media Agency in India",
     description: site.description,
     locale: "en_IN",
+    images: [logoShareImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Crayora | Website, App & Social Media Agency in India",
     description: site.description,
+    images: [logoShareImage.url],
   },
   robots: {
     index: true,
@@ -77,7 +79,7 @@ const jsonLd = {
       name: site.name,
       url: site.url,
       logo: { "@type": "ImageObject", url: absoluteUrl("/brand/crayora-logo.png"), width: 512, height: 512 },
-      image: absoluteUrl("/opengraph-image"),
+      image: absoluteUrl(logoShareImage.url),
       email: site.email,
       telephone: site.phone.replace(/\s/g, ""),
       description: site.description,

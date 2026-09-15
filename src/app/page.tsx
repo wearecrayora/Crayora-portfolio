@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { logoShareImage } from "@/lib/seo";
 import { Hero } from "@/components/home/hero";
 import { Marquee } from "@/components/home/marquee";
 import { Studio } from "@/components/home/studio";
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
     siteName: "Crayora",
     locale: "en_IN",
     title: homeTitle,
+    images: [logoShareImage],
   },
+  twitter: { card: "summary_large_image", title: homeTitle, images: [logoShareImage.url] },
 };
 
 export default function HomePage() {

@@ -16,7 +16,7 @@ export default function NotFound() {
         <Sparkle className="size-[0.7em] animate-[spin_6s_linear_infinite] text-indigo" />
         4
       </div>
-      <h1 className="display-md max-w-[18ch]">This page coloured itself right off the map.</h1>
+      <h1 className="display-md max-w-[18ch]">You dreamt this page. We haven&apos;t coded it yet.</h1>
       <p className="max-w-[46ch] text-lg text-mute">The link may be old or mistyped. The rest of the studio is still here.</p>
       <div className="flex flex-wrap gap-3">
         <TransitionLink href="/" className="btn btn-primary">

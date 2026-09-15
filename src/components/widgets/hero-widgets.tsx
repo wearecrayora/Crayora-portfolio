@@ -22,7 +22,8 @@ const widgets = [
     icon: Lightning,
     value: "1 day",
     label: "Reply time",
-    place: "hidden lg:block lg:right-[30%] lg:bottom-[24%]",
+    // Top arc above the mark: the tagline runs wide across the lower half.
+    place: "hidden lg:block lg:right-[24%] lg:top-[12%]",
     float: "[animation-duration:6.8s] [animation-delay:-4s]",
   },
 ];
