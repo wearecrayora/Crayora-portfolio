@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -55,15 +55,15 @@ export function WorldWork() {
       <SplitReveal id="world-title" className="display-lg max-w-[12ch]">
         From Odisha to the <span className="text-outline">world.</span>
       </SplitReveal>
-      <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-12 md:gap-10">
-        <div className="md:col-span-5">
-          <div className="md:sticky md:top-28">
-            <Globe active={active} className="relative mx-auto w-full max-w-[520px]" />
+      <div className="mt-12 grid gap-12 md:mt-16 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          <div className="lg:sticky lg:top-28">
+            <Globe active={active} className="relative mx-auto w-full max-w-[380px] md:max-w-[440px] lg:max-w-[520px]" />
             <p className="mt-4 text-center text-sm text-dim">Drag to spin. Lines run from our studio in Odisha.</p>
           </div>
         </div>
 
-        <div className="md:col-span-7 md:pt-4">
+        <div className="lg:col-span-7 lg:pt-4">
           <div role="tablist" aria-label="Filter projects by country" className="flex flex-wrap gap-2">
             {countries.map((c, i) => {
               const count = projectsByCountry(c.code).length;
@@ -83,7 +83,7 @@ export function WorldWork() {
                     "flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-colors duration-300",
                     selected
                       ? "border-indigo bg-indigo text-white"
-                      : "border-line-strong text-mute hover:border-paper hover:text-paper",
+                      : "border-line-strong text-mute hover:border-ink hover:text-ink",
                   )}
                 >
                   {c.code === "global" ? "Global" : c.short}
@@ -142,7 +142,7 @@ export function WorldWork() {
       <div
         ref={preview}
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-30 hidden w-[22rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-line-strong opacity-0 shadow-[0_40px_80px_-20px_rgb(4_6_20/0.9)] md:block"
+        className="pointer-events-none fixed left-0 top-0 z-30 hidden w-[22rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-line-strong opacity-0 shadow-[var(--shadow-lift)] md:block"
       >
         {projects.map((p) => (
           <Image

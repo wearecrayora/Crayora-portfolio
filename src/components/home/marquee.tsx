@@ -43,18 +43,22 @@ export function Marquee() {
   const row = (hidden: boolean) =>
     items.map((item, i) => (
       <li key={`${item}-${hidden}`} className="flex items-center gap-8 pr-8 md:gap-12 md:pr-12" aria-hidden={hidden || undefined}>
-        <span className={i % 2 ? "text-outline" : "text-paper"}>{item}</span>
+        <span className={i % 2 ? "text-outline" : "text-ink"}>{item}</span>
         <Sparkle className="size-8 shrink-0 text-indigo md:size-12" />
       </li>
     ));
 
+  // The outer wrapper clips the endless track; the band is wider than the screen
+  // so its tilted ends never show. Without the clip, phones zoom the page out.
   return (
-    <div ref={root} className="relative -rotate-2 border-y border-line bg-navy py-6 md:py-9">
-      <h2 className="sr-only">What we do</h2>
-      <ul data-track className="flex w-max font-display text-5xl font-extrabold tracking-tight md:text-7xl">
-        {row(false)}
-        {row(true)}
-      </ul>
+    <div ref={root} className="overflow-hidden py-6">
+      <div className="glass relative -mx-[5vw] -rotate-2 overflow-hidden !rounded-none !border-x-0 py-6 md:py-9">
+        <h2 className="sr-only">What we do</h2>
+        <ul data-track className="flex w-max font-display text-5xl font-extrabold tracking-tight md:text-7xl">
+          {row(false)}
+          {row(true)}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Syne } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { RouteTransitionProvider } from "@/components/providers/route-transition";
@@ -6,6 +6,8 @@ import { Preloader } from "@/components/preloader";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { BoneyardSetup } from "@/components/providers/boneyard-setup";
+import { ContactDock } from "@/components/widgets/contact-dock";
+import { ScrollProgress } from "@/components/widgets/scroll-progress";
 import { site } from "@/data/site";
 import { services } from "@/data/services";
 import { absoluteUrl, organizationId } from "@/lib/seo";
@@ -47,13 +49,11 @@ export const metadata: Metadata = {
     title: "Crayora | Website, App & Social Media Agency in India",
     description: site.description,
     locale: "en_IN",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Crayora, creative tech studio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Crayora | Website, App & Social Media Agency in India",
     description: site.description,
-    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -63,8 +63,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#070b1a",
-  colorScheme: "dark",
+  themeColor: "#f6f2ec",
+  colorScheme: "light",
 };
 
 // Site-wide entities. Pages reference the organisation by @id instead of repeating it.
@@ -77,7 +77,7 @@ const jsonLd = {
       name: site.name,
       url: site.url,
       logo: { "@type": "ImageObject", url: absoluteUrl("/brand/crayora-logo.png"), width: 512, height: 512 },
-      image: absoluteUrl("/og.png"),
+      image: absoluteUrl("/opengraph-image"),
       email: site.email,
       telephone: site.phone.replace(/\s/g, ""),
       description: site.description,
@@ -122,7 +122,7 @@ const jsonLd = {
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" className={`dark ${syne.variable} ${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${syne.variable} ${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <JsonLd data={jsonLd} />
         <noscript>
@@ -132,19 +132,27 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="grain">
         <a
           href="#main"
-          className="fixed left-4 top-4 z-[110] -translate-y-24 rounded-full bg-paper px-5 py-3 font-semibold text-ink transition-transform focus:translate-y-0"
+          className="fixed left-4 top-4 z-[110] -translate-y-24 rounded-full bg-ink px-5 py-3 font-semibold text-canvas transition-transform focus:translate-y-0"
         >
           Skip to content
         </a>
+        <div className="aurora" aria-hidden="true">
+          <span className="a1" />
+          <span className="a2" />
+          <span className="a3" />
+          <span className="a4" />
+        </div>
         <BoneyardSetup />
         <SmoothScroll>
           <RouteTransitionProvider>
             <Preloader />
             <SiteHeader />
-            <main id="main" className="relative z-[1] bg-ink">
+            <main id="main" className="relative z-[1]">
               {children}
             </main>
             <SiteFooter />
+            <ContactDock />
+            <ScrollProgress />
           </RouteTransitionProvider>
         </SmoothScroll>
       </body>

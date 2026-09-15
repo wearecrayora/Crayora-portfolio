@@ -1,4 +1,4 @@
-﻿import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { services } from "@/data/services";
 import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import { SplitReveal } from "@/components/ui/split-reveal";
@@ -60,7 +60,7 @@ export default function ServicesPage() {
                     ))}
                   </ul>
                 </div>
-                <span className="grid size-14 place-items-center justify-self-start rounded-full border border-line-strong transition-colors duration-500 group-hover:border-indigo group-hover:bg-indigo md:col-span-1 md:justify-self-end">
+                <span className="grid size-14 place-items-center justify-self-start rounded-full border border-line-strong transition-colors duration-500 group-hover:border-indigo group-hover:bg-indigo group-hover:text-white md:col-span-1 md:justify-self-end">
                   <ArrowUpRight weight="bold" className="size-5 transition-transform duration-500 group-hover:rotate-45" />
                   <span className="sr-only">Explore {s.name}</span>
                 </span>

@@ -1,4 +1,4 @@
-﻿import { WorkArchive } from "@/components/work/work-archive";
+import { WorkArchive } from "@/components/work/work-archive";
 import { SplitReveal } from "@/components/ui/split-reveal";
 import { projects } from "@/data/projects";
 import { countries } from "@/data/countries";

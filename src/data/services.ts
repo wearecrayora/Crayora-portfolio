@@ -1,4 +1,4 @@
-﻿import type { ProjectType } from "./projects";
+import type { ProjectType } from "./projects";
 
 export type ServiceKey = "web" | "apps" | "social" | "software";
 

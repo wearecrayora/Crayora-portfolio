@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useRef, useState, type MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -73,10 +73,10 @@ function Mark({ motion, reduced }: { motion: MutableRefObject<HeroMotion>; reduc
       <group ref={tilt}>
         <mesh geometry={c} castShadow>
           <meshPhysicalMaterial
-            // Navy-tinted chrome: echoes the brand C and keeps white type legible on top.
-            color="#5d6399"
+            // Pearl chrome: reads as a sculpted object on the off-white canvas and keeps navy type legible on top.
+            color="#d9dcef"
             metalness={1}
-            roughness={0.18}
+            roughness={0.2}
             clearcoat={1}
             clearcoatRoughness={0.08}
             envMapIntensity={1.35}
@@ -100,7 +100,7 @@ function Mark({ motion, reduced }: { motion: MutableRefObject<HeroMotion>; reduc
 function Studio() {
   return (
     <Environment resolution={256} frames={1}>
-      <color attach="background" args={["#070b1a"]} />
+      <color attach="background" args={["#eceef6"]} />
       <group rotation={[-Math.PI / 3, 0, 1]}>
         <Lightformer form="circle" intensity={5} position={[0, 5, -9]} scale={8} />
         <Lightformer form="rect" intensity={3} position={[-5, 1, -1]} scale={[10, 2, 1]} rotation-y={Math.PI / 2} />
@@ -117,6 +117,8 @@ export default function HeroScene({ motion }: { motion: MutableRefObject<HeroMot
   const [visible, setVisible] = useState(true);
   // Client-only component (loaded with ssr: false), so reading matchMedia here is safe.
   const [reduced] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  // Phones get a lighter scene: fewer particles and a lower pixel ratio.
+  const [compact] = useState(() => window.matchMedia("(max-width: 767px)").matches);
 
   useEffect(() => {
     const el = wrap.current;
@@ -130,7 +132,7 @@ export default function HeroScene({ motion }: { motion: MutableRefObject<HeroMot
   return (
     <div ref={wrap} className="absolute inset-0">
       <Canvas
-        dpr={[1, 1.75]}
+        dpr={compact ? [1, 1.5] : [1, 1.75]}
         camera={{ position: [0, 0, 8], fov: 35 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         frameloop={visible ? (reduced ? "demand" : "always") : "never"}
@@ -138,9 +140,9 @@ export default function HeroScene({ motion }: { motion: MutableRefObject<HeroMot
       >
         <ambientLight intensity={0.3} />
         <directionalLight position={[4, 6, 6]} intensity={1.2} />
-        <pointLight position={[0, 0, 2]} intensity={6} color="#4b3fff" distance={6} />
+        <pointLight position={[0, 0, 2]} intensity={4} color="#4b3fff" distance={6} />
         <Mark motion={motion} reduced={reduced} />
-        {!reduced && <Sparkles count={70} scale={[9, 6, 4]} size={2.6} speed={0.35} color="#b4aeff" opacity={0.85} />}
+        {!reduced && <Sparkles count={compact ? 28 : 60} scale={[9, 6, 4]} size={3} speed={0.35} color="#4b3fff" opacity={0.55} />}
         <Studio />
       </Canvas>
     </div>

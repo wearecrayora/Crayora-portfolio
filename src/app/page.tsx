@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
 import { Marquee } from "@/components/home/marquee";
 import { Studio } from "@/components/home/studio";
@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     siteName: "Crayora",
     locale: "en_IN",
     title: homeTitle,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Crayora, creative tech studio" }],
   },
 };
 

@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
@@ -30,12 +30,6 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
     description: project.summary,
     path: `/work/${project.slug}`,
     type: "article",
-    image: {
-      url: project.image.src,
-      width: project.image.width,
-      height: project.image.height,
-      alt: `${project.title} website by Crayora`,
-    },
   });
 }
 
@@ -105,7 +99,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           {facts.map((f) => (
             <div key={f.label}>
               <dt className="mono-label">{f.label}</dt>
-              <dd className="mt-2 text-lg text-paper">
+              <dd className="mt-2 text-lg text-ink">
                 {f.href ? (
                   <TransitionLink href={f.href} className="link-underline">
                     {f.value}
@@ -123,18 +117,18 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         <CaseCover project={project} />
       </div>
 
-      <section className="shell grid gap-14 py-24 md:grid-cols-12 md:py-36" aria-labelledby="brief-title">
-        <div className="md:col-span-7">
+      <section className="shell grid gap-14 py-24 md:py-36 lg:grid-cols-12" aria-labelledby="brief-title">
+        <div className="lg:col-span-7">
           <SplitReveal id="brief-title" className="display-md">
             The brief
           </SplitReveal>
           <p className="mt-8 max-w-[62ch] text-lg leading-relaxed text-mute">{project.about ?? project.summary}</p>
         </div>
-        <div className="md:col-span-5">
+        <div className="lg:col-span-5">
           <h2 className="font-display text-2xl font-bold tracking-tight">Built with</h2>
           <ul className="mt-6 flex flex-wrap gap-2">
             {project.stack.map((s) => (
-              <li key={s} className="chip !text-paper">
+              <li key={s} className="chip !text-ink">
                 {s}
               </li>
             ))}
@@ -142,16 +136,16 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         </div>
       </section>
 
-      <section className="border-y border-line bg-navy py-24 md:py-32" aria-labelledby="built-title">
+      <section className="py-24 md:py-32" aria-labelledby="built-title">
         <div className="shell">
           <SplitReveal id="built-title" className="display-md">
             What we delivered
           </SplitReveal>
-          <ul className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+          <ul className="mt-14 grid gap-5 md:grid-cols-3 md:gap-6">
             {project.highlights.map((h) => (
-              <li key={h} className="flex flex-col gap-5 border-t border-line-strong pt-6">
+              <li key={h} className="glass-violet flex flex-col gap-5 rounded-[var(--radius-panel)] p-8">
                 <Sparkle className="size-7 text-indigo" />
-                <p className="text-lg leading-relaxed text-paper">{h}</p>
+                <p className="text-lg leading-relaxed text-ink">{h}</p>
               </li>
             ))}
           </ul>

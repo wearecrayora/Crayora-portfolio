@@ -54,7 +54,7 @@ export function CtaBlock() {
           <Magnetic strength={0.45}>
             <TransitionLink
               href="/contact"
-              className="group grid size-44 place-items-center rounded-full bg-paper text-center text-ink transition-transform duration-300 active:scale-95 md:size-56"
+              className="group grid size-44 place-items-center rounded-full bg-ink text-center text-canvas transition-transform duration-300 active:scale-95 md:size-56"
             >
               <span className="flex flex-col items-center gap-2 font-display text-xl font-extrabold tracking-tight md:text-2xl">
                 <ArrowUpRight weight="bold" className="size-7 transition-transform duration-500 group-hover:rotate-45" />

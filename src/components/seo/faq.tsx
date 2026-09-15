@@ -24,7 +24,7 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
           <details key={f.q} className="group border-b border-line-strong">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left [&::-webkit-details-marker]:hidden">
               <h3 className="font-display text-xl font-bold tracking-tight md:text-2xl">{f.q}</h3>
-              <span className="grid size-10 shrink-0 place-items-center rounded-full border border-line-strong text-paper transition-transform duration-500 ease-[var(--ease-crayora)] group-open:rotate-45 group-open:border-indigo group-open:bg-indigo">
+              <span className="grid size-10 shrink-0 place-items-center rounded-full border border-line-strong text-ink transition-transform duration-500 ease-[var(--ease-crayora)] group-open:rotate-45 group-open:border-indigo group-open:bg-indigo group-open:text-white">
                 <Plus weight="bold" className="size-4" />
               </span>
             </summary>

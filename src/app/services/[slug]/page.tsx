@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { process, serviceBySlug, services } from "@/data/services";
@@ -60,8 +60,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
     <>
       <JsonLd data={serviceJsonLd} />
 
-      <header className="shell grid gap-14 pb-20 pt-32 md:grid-cols-12 md:items-center md:pb-28 md:pt-40">
-        <div className="@container md:col-span-7">
+      <header className="shell grid gap-14 pb-20 pt-32 md:pb-28 md:pt-40 lg:grid-cols-12 lg:items-center">
+        <div className="@container lg:col-span-7">
           <Breadcrumbs items={[["Home", "/"], ["Services", "/services"], [service.name, path]]} />
           <div style={{ fontSize: fitHeading(service.name, "clamp(2.5rem, 6.4vw, 6.25rem)") }}>
             <SplitReveal as="h1" by="chars" onIntro delay={0.3} className="display-lg mt-8 !text-[1em]">
@@ -74,24 +74,24 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
               Start a project
               <ArrowUpRight weight="bold" className="size-4" />
             </TransitionLink>
-            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="link-underline text-mute hover:text-paper">
+            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="link-underline text-mute hover:text-ink">
               Or message us on WhatsApp
             </a>
           </div>
         </div>
-        <div className="md:col-span-5">
+        <div className="mx-auto w-full max-w-lg lg:col-span-5 lg:max-w-none">
           <ServiceVisual kind={service.key} />
         </div>
       </header>
 
-      <section className="border-y border-line bg-navy py-24 md:py-32" aria-labelledby="included-title">
+      <section className="py-24 md:py-32" aria-labelledby="included-title">
         <div className="shell">
           <SplitReveal id="included-title" className="display-md max-w-[16ch]">
             What you get
           </SplitReveal>
-          <div className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line md:grid-cols-2">
+          <div className="mt-14 grid gap-4 md:grid-cols-2">
             {service.features.map((f) => (
-              <div key={f.title} className="flex flex-col gap-4 bg-navy p-8 md:p-10">
+              <div key={f.title} className="glass flex flex-col gap-4 rounded-[var(--radius-panel)] p-8 md:p-10">
                 <Sparkle className="size-7 text-indigo" />
                 <h3 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{f.title}</h3>
                 <p className="max-w-[44ch] text-lg leading-relaxed text-mute">{f.body}</p>
@@ -101,7 +101,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           <h3 className="mt-16 font-display text-xl font-bold tracking-tight">Every engagement can include</h3>
           <ul className="mt-5 flex flex-wrap gap-2">
             {service.deliverables.map((d) => (
-              <li key={d} className="chip !text-paper">
+              <li key={d} className="chip !text-ink">
                 {d}
               </li>
             ))}
@@ -113,7 +113,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         <SplitReveal id="how-title" className="display-md">
           How we work
         </SplitReveal>
-        <ol className="mt-14 grid gap-10 md:grid-cols-4 md:gap-8">
+        <ol className="mt-14 grid gap-10 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
           {process.map((step, i) => (
             <li key={step.title} className="border-t border-line-strong pt-6">
               <span className="font-mono text-sm text-indigo-hi">{String(i + 1).padStart(2, "0")}</span>
@@ -126,17 +126,17 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         <h2 className="mt-24 font-display text-2xl font-bold tracking-tight md:text-3xl">Tools and platforms</h2>
         {/* Column count matches the tool count so the grid never has empty cells. */}
         <ul
-          className={`mt-8 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line ${
+          className={`mt-8 grid gap-3 ${
             service.tools.length === 6 ? "grid-cols-3 sm:grid-cols-6" : "grid-cols-4 sm:grid-cols-8"
           }`}
         >
           {service.tools.map((t) => (
-            <li key={t.file} className="group grid aspect-square place-items-center bg-ink">
+            <li key={t.file} className="glass group grid aspect-square place-items-center rounded-2xl">
               <span
                 role="img"
                 aria-label={t.name}
                 title={t.name}
-                className="logo-mask size-8 text-mute transition-colors duration-300 group-hover:text-paper md:size-10"
+                className="logo-mask size-8 text-mute transition-colors duration-300 group-hover:text-ink md:size-10"
                 style={{ "--logo": `url(/stack/${t.file}.svg)` } as React.CSSProperties}
               />
             </li>
@@ -150,7 +150,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             <SplitReveal id="work-title" className="display-md">
               Recent work
             </SplitReveal>
-            <TransitionLink href="/work" className="link-underline text-mute hover:text-paper">
+            <TransitionLink href="/work" className="link-underline text-mute hover:text-ink">
               See the work
             </TransitionLink>
           </div>
@@ -180,7 +180,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             <li key={s.key}>
               <TransitionLink
                 href={`/services/${s.slug}`}
-                className="group flex h-full items-center justify-between gap-4 rounded-[var(--radius-panel)] border border-line-strong p-6 transition-colors duration-500 hover:border-indigo hover:bg-indigo"
+                className="group flex h-full items-center justify-between gap-4 rounded-[var(--radius-panel)] border glass p-6 transition-colors duration-500 hover:border-indigo hover:bg-indigo hover:text-white"
               >
                 <span className="font-display text-xl font-bold tracking-tight">{s.name}</span>
                 <ArrowUpRight weight="bold" className="size-5 shrink-0 transition-transform duration-500 group-hover:rotate-45" />

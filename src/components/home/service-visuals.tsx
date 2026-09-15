@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import {
   AndroidLogo,
   AppleLogo,
@@ -18,8 +18,8 @@ import type { ServiceKey } from "@/data/services";
 function Shot({ slug, className, sizes }: { slug: string; className?: string; sizes: string }) {
   const p = projectBySlug(slug)!;
   return (
-    <div className={`overflow-hidden rounded-xl border border-line-strong bg-navy shadow-[0_30px_60px_-20px_rgb(4_6_20/0.8)] ${className ?? ""}`}>
-      <div className="flex h-6 items-center gap-1.5 border-b border-line bg-navy-3 px-3" aria-hidden="true">
+    <div className={`overflow-hidden rounded-xl border border-line bg-surface-2 shadow-[var(--shadow-lift)] ${className ?? ""}`}>
+      <div className="flex h-6 items-center gap-1.5 border-b border-line bg-surface px-3" aria-hidden="true">
         <span className="size-2 rounded-full bg-line-strong" />
         <span className="size-2 rounded-full bg-line-strong" />
         <span className="size-2 rounded-full bg-line-strong" />
@@ -50,19 +50,19 @@ function AppsVisual() {
   ];
   return (
     <div className="relative mx-auto grid aspect-square w-full max-w-md place-items-center" data-visual>
-      <div className="absolute inset-[6%] rounded-full border border-dashed border-paper/25" aria-hidden="true" />
+      <div className="absolute inset-[6%] rounded-full border border-dashed border-indigo-deep/40" aria-hidden="true" />
       <div className="absolute inset-[6%] animate-[spin_40s_linear_infinite]" aria-hidden="true">
         {orbit.map((logo, i) => {
           const angle = (i / orbit.length) * Math.PI * 2;
           return (
             <span
               key={logo.file}
-              className="absolute grid size-12 place-items-center rounded-full border border-paper/20 bg-indigo-deep md:size-14"
+              className="absolute grid size-12 place-items-center rounded-full border border-white/20 bg-indigo-deep shadow-[var(--shadow-card)] md:size-14"
               // Rounded so server and client render identical style strings.
               style={{ left: `${(50 + Math.cos(angle) * 50).toFixed(3)}%`, top: `${(50 + Math.sin(angle) * 50).toFixed(3)}%`, translate: "-50% -50%" }}
             >
               <span
-                className="logo-mask size-6 animate-[spin_40s_linear_infinite_reverse] text-paper"
+                className="logo-mask size-6 animate-[spin_40s_linear_infinite_reverse] text-white"
                 style={{ "--logo": `url(/stack/${logo.file}.svg)` } as React.CSSProperties}
                 title={logo.name}
               />
@@ -71,11 +71,11 @@ function AppsVisual() {
         })}
       </div>
       <div className="relative flex gap-4">
-        <div className="flex h-56 w-28 -rotate-6 flex-col items-center justify-center gap-3 rounded-[1.75rem] border-2 border-paper/80 bg-navy md:h-64 md:w-32">
-          <AndroidLogo weight="fill" className="size-12 text-paper" />
-          <span className="mono-label !text-paper">Android</span>
+        <div className="flex h-56 w-28 -rotate-6 flex-col items-center justify-center gap-3 rounded-[1.75rem] border-2 border-ink/80 bg-surface-2 shadow-[var(--shadow-lift)] md:h-64 md:w-32">
+          <AndroidLogo weight="fill" className="size-12 text-ink" />
+          <span className="mono-label !text-ink">Android</span>
         </div>
-        <div className="flex h-56 w-28 translate-y-6 rotate-6 flex-col items-center justify-center gap-3 rounded-[1.75rem] border-2 border-paper/80 bg-paper text-ink md:h-64 md:w-32">
+        <div className="flex h-56 w-28 translate-y-6 rotate-6 flex-col items-center justify-center gap-3 rounded-[1.75rem] border-2 border-ink bg-ink text-canvas shadow-[var(--shadow-lift)] md:h-64 md:w-32">
           <AppleLogo weight="fill" className="size-12" />
           <span className="font-mono text-xs uppercase tracking-[0.08em]">iOS</span>
         </div>
@@ -86,15 +86,15 @@ function AppsVisual() {
 
 function SocialVisual() {
   const tiles = [
-    { icon: Camera, label: "Shoot", tone: "bg-paper text-ink" },
-    { icon: FilmSlate, label: "Reels", tone: "bg-navy text-paper" },
+    { icon: Camera, label: "Shoot", tone: "bg-ink text-canvas" },
+    { icon: FilmSlate, label: "Reels", tone: "card text-ink" },
     { icon: PenNib, label: "Captions", tone: "bg-indigo text-white" },
-    { icon: CalendarCheck, label: "Schedule", tone: "bg-navy text-paper" },
-    { icon: null, label: "Crayora", tone: "bg-ink text-indigo" },
-    { icon: Hash, label: "Reach", tone: "bg-paper text-ink" },
+    { icon: CalendarCheck, label: "Schedule", tone: "card text-ink" },
+    { icon: null, label: "Crayora", tone: "card text-indigo" },
+    { icon: Hash, label: "Reach", tone: "bg-ink text-canvas" },
     { icon: ChatsCircle, label: "Replies", tone: "bg-indigo text-white" },
-    { icon: Heart, label: "Community", tone: "bg-paper text-ink" },
-    { icon: ChartLineUp, label: "Reports", tone: "bg-navy text-paper" },
+    { icon: Heart, label: "Community", tone: "bg-ink text-canvas" },
+    { icon: ChartLineUp, label: "Reports", tone: "card text-ink" },
   ];
   return (
     <div className="mx-auto grid w-full max-w-md grid-cols-3 gap-2 md:gap-3" data-visual>

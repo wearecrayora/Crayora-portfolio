@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -44,7 +44,7 @@ export function CaseCover({ project }: { project: Project }) {
   );
 
   const cover = (
-    <div data-frame className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-panel)] border border-line bg-navy-2 md:aspect-[2/1]">
+    <div data-frame className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-panel)] border border-line bg-surface-2 shadow-[var(--shadow-card)] md:aspect-[2/1]">
       <div data-img className="absolute -inset-y-[8%] inset-x-0">
         <Image
           src={project.image.src}
@@ -68,7 +68,7 @@ export function CaseCover({ project }: { project: Project }) {
         fallback={
           <div className="relative">
             {cover}
-            <div className="absolute inset-0 animate-pulse rounded-[var(--radius-panel)] bg-navy-2" />
+            <div className="absolute inset-0 animate-pulse rounded-[var(--radius-panel)] bg-surface-3" />
           </div>
         }
       >

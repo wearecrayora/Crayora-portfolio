@@ -3,23 +3,29 @@
 
 /*
  * Crayora design tokens.
- * One committed look: the brand's deep navy with a single electric-indigo accent.
+ * One committed look: a warm ivory canvas washed with a violet aurora, frosted-glass panels,
+ * brand navy for type and a single electric-indigo accent.
  * Radius system: interactive controls are full pills, media and panels use --radius-panel.
  * Z-index scale: header 40, grain 60, route loader 90, preloader 100.
  */
 @theme {
-  --color-ink: #070b1a;
-  --color-navy: #0c1229;
-  --color-navy-2: #121833;
-  --color-navy-3: #1b2247;
-  --color-paper: #f2f3f8;
-  --color-mute: #a3a9c2;
-  --color-dim: #6b7394;
+  /* Surfaces, lightest to darkest: cards sit on the canvas, bands sit behind sections. */
+  --color-canvas: #f6f2ec;
+  --color-surface: #eee8df;
+  --color-surface-2: #fcfaf6;
+  --color-surface-3: #e7e0d5;
+  /* Type: brand navy, with muted steps that all pass WCAG AA on the canvas. */
+  --color-ink: #0c1229;
+  --color-mute: #535a72;
+  --color-dim: #6c7289;
   --color-indigo: #4b3fff;
-  --color-indigo-hi: #948dff;
+  --color-indigo-hi: #3d31ee;
   --color-indigo-deep: #2c22c9;
-  --color-line: rgb(242 243 248 / 0.1);
-  --color-line-strong: rgb(242 243 248 / 0.2);
+  --color-line: rgb(12 18 41 / 0.09);
+  --color-line-strong: rgb(12 18 41 / 0.16);
+
+  --shadow-card: 0 1px 2px rgb(12 18 41 / 0.04), 0 24px 48px -28px rgb(44 34 201 / 0.3);
+  --shadow-lift: 0 2px 4px rgb(12 18 41 / 0.05), 0 40px 80px -36px rgb(44 34 201 / 0.38);
 
   --radius-panel: 1.5rem;
 
@@ -36,14 +42,16 @@
 
 @layer base {
   html {
-    color-scheme: dark;
-    background: var(--color-ink);
+    /* Safety net: nothing may widen the layout viewport (phones would zoom out). */
+    overflow-x: clip;
+    color-scheme: light;
+    background: var(--color-canvas);
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background: var(--color-ink);
-    color: var(--color-paper);
+    background: var(--color-canvas);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -115,7 +123,54 @@
   /* Hollow display type for the second voice in a headline. */
   .text-outline {
     color: transparent;
-    -webkit-text-stroke: 1.5px var(--color-paper);
+    -webkit-text-stroke: 1.5px var(--color-ink);
+  }
+
+  /* Elevated ivory card with a hairline edge and a soft indigo-tinted shadow. */
+  .card {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-card);
+  }
+
+  /*
+   * Frosted glass (web approximation of a glass material, not an Apple API):
+   * translucent fill, backdrop blur that picks up the aurora, a bright hairline
+   * edge and an inner top highlight for refraction.
+   */
+  .glass,
+  .glass-strong,
+  .glass-violet {
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid rgb(255 255 255 / 0.7);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.85),
+      0 1px 2px rgb(12 18 41 / 0.04),
+      0 24px 48px -30px rgb(44 34 201 / 0.35);
+  }
+
+  .glass {
+    background: linear-gradient(140deg, rgb(255 255 255 / 0.62), rgb(255 255 255 / 0.26));
+  }
+
+  /* Near-opaque glass for panels that can overlap other content. */
+  .glass-strong {
+    background: linear-gradient(140deg, rgb(255 253 250 / 0.9), rgb(250 246 255 / 0.74));
+  }
+
+  .glass-violet {
+    background: linear-gradient(140deg, rgb(139 124 255 / 0.26), rgb(255 255 255 / 0.4) 62%);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .glass,
+    .glass-strong,
+    .glass-violet {
+      background: var(--color-surface-2);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 
   .text-outline-indigo {
@@ -167,25 +222,29 @@
   }
 
   .btn-primary::before {
-    background: var(--color-paper);
+    background: var(--color-ink);
   }
 
   .btn-primary:hover {
-    color: var(--color-ink);
+    color: var(--color-canvas);
   }
 
   .btn-ghost {
-    border: 1px solid var(--color-line-strong);
-    color: var(--color-paper);
+    border: 1px solid rgb(255 255 255 / 0.75);
+    color: var(--color-ink);
+    background: rgb(255 255 255 / 0.45);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    backdrop-filter: blur(12px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.8), 0 10px 30px -18px rgb(44 34 201 / 0.4);
   }
 
   .btn-ghost::before {
-    background: var(--color-paper);
+    background: var(--color-ink);
   }
 
   .btn-ghost:hover {
-    color: var(--color-ink);
-    border-color: var(--color-paper);
+    color: var(--color-canvas);
+    border-color: var(--color-ink);
   }
 
   .chip {
@@ -198,6 +257,9 @@
     font-size: 0.8rem;
     color: var(--color-mute);
     white-space: nowrap;
+    background: rgb(255 255 255 / 0.45);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
   }
 
   .mono-label {
@@ -232,8 +294,88 @@
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.07;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/*
+ * Ambient aurora: soft violet and indigo light fixed behind the whole site.
+ * Pure radial gradients (no blur filters) drifting on the compositor, so it
+ * costs almost nothing to scroll over. Glass panels pick it up through blur.
+ */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.aurora .a1 {
+  width: 70vmax;
+  height: 70vmax;
+  left: -22vmax;
+  top: -26vmax;
+  background: radial-gradient(closest-side, rgb(124 104 255 / 0.3), transparent 72%);
+  animation: aurora-a 30s ease-in-out infinite alternate;
+}
+
+.aurora .a2 {
+  width: 60vmax;
+  height: 60vmax;
+  right: -24vmax;
+  top: 8vh;
+  background: radial-gradient(closest-side, rgb(75 63 255 / 0.22), transparent 72%);
+  animation: aurora-b 36s ease-in-out infinite alternate;
+}
+
+.aurora .a3 {
+  width: 72vmax;
+  height: 72vmax;
+  left: 18vw;
+  bottom: -40vmax;
+  background: radial-gradient(closest-side, rgb(186 164 255 / 0.4), transparent 72%);
+  animation: aurora-c 42s ease-in-out infinite alternate;
+}
+
+.aurora .a4 {
+  width: 42vmax;
+  height: 42vmax;
+  right: 6vw;
+  bottom: -8vmax;
+  background: radial-gradient(closest-side, rgb(226 160 255 / 0.22), transparent 72%);
+  animation: aurora-b 48s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes aurora-a {
+  to {
+    transform: translate3d(12vmax, 10vmax, 0) scale(1.15);
+  }
+}
+
+@keyframes aurora-b {
+  to {
+    transform: translate3d(-10vmax, 14vmax, 0) scale(0.9);
+  }
+}
+
+@keyframes aurora-c {
+  to {
+    transform: translate3d(-8vmax, -12vmax, 0) scale(1.1);
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
 }
 
 /* Keep SplitText line masks from clipping descenders. */

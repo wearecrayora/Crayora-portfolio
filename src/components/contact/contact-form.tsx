@@ -12,7 +12,7 @@ type Status = "idle" | "sending" | "sent" | "error";
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
 const inputClass =
-  "w-full rounded-2xl border border-line-strong bg-navy/60 px-4 py-3.5 text-paper placeholder:text-dim transition-colors duration-300 focus:border-indigo-hi focus:outline-none aria-[invalid=true]:border-[#ff7a8a]";
+  "w-full rounded-2xl border border-white/80 bg-white/55 shadow-[inset_0_1px_0_rgb(255_255_255/0.9)] backdrop-blur-md px-4 py-3.5 text-ink placeholder:text-dim transition-colors duration-300 focus:border-indigo-hi focus:outline-none aria-[invalid=true]:border-[#c8324a]";
 
 export function ContactForm() {
   const root = useRef<HTMLFormElement>(null);
@@ -79,7 +79,7 @@ export function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div data-done className="flex flex-col items-start gap-6 rounded-[var(--radius-panel)] border border-line bg-navy-2 p-8 md:p-12" role="status">
+      <div data-done className="flex flex-col items-start gap-6 rounded-[var(--radius-panel)] border border-line bg-surface-2 p-8 md:p-12" role="status">
         <span data-done-star className="inline-block">
           <Sparkle className="size-14 text-indigo" />
         </span>
@@ -103,35 +103,35 @@ export function ContactForm() {
     <form ref={root} onSubmit={onSubmit} noValidate className="flex flex-col gap-7">
       <div className="grid gap-7 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-sm font-medium text-paper">
+          <label htmlFor="name" className="text-sm font-medium text-ink">
             Name
           </label>
           <input id="name" name="name" autoComplete="name" className={inputClass} {...field("name")} />
           {errors.name && (
-            <p id="name-error" className="text-sm text-[#ff9aa6]">
+            <p id="name-error" className="text-sm text-[#b42a41]">
               {errors.name}
             </p>
           )}
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-medium text-paper">
+          <label htmlFor="email" className="text-sm font-medium text-ink">
             Email
           </label>
           <input id="email" name="email" type="email" autoComplete="email" className={inputClass} {...field("email")} />
           {errors.email && (
-            <p id="email-error" className="text-sm text-[#ff9aa6]">
+            <p id="email-error" className="text-sm text-[#b42a41]">
               {errors.email}
             </p>
           )}
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="text-sm font-medium text-paper">
+          <label htmlFor="phone" className="text-sm font-medium text-ink">
             Phone or WhatsApp <span className="text-dim">(optional)</span>
           </label>
           <input id="phone" name="phone" type="tel" autoComplete="tel" className={inputClass} />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="company" className="text-sm font-medium text-paper">
+          <label htmlFor="company" className="text-sm font-medium text-ink">
             Company <span className="text-dim">(optional)</span>
           </label>
           <input id="company" name="company" autoComplete="organization" className={inputClass} />
@@ -139,7 +139,7 @@ export function ContactForm() {
       </div>
 
       <fieldset className="flex flex-col gap-3">
-        <legend className="mb-3 text-sm font-medium text-paper">What do you need?</legend>
+        <legend className="mb-3 text-sm font-medium text-ink">What do you need?</legend>
         <div className="flex flex-wrap gap-2">
           {services.map((s) => {
             const on = picked.includes(s.title);
@@ -151,7 +151,7 @@ export function ContactForm() {
                 onClick={() => toggle(s.title)}
                 className={cn(
                   "rounded-full border px-4 py-2.5 text-sm font-medium transition-colors duration-300",
-                  on ? "border-indigo bg-indigo text-white" : "border-line-strong text-mute hover:border-paper hover:text-paper",
+                  on ? "border-indigo bg-indigo text-white" : "border-line-strong text-mute hover:border-ink hover:text-ink",
                 )}
               >
                 {s.title}
@@ -162,7 +162,7 @@ export function ContactForm() {
       </fieldset>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="message" className="text-sm font-medium text-paper">
+        <label htmlFor="message" className="text-sm font-medium text-ink">
           About the project
         </label>
         <textarea
@@ -174,21 +174,21 @@ export function ContactForm() {
           {...field("message")}
         />
         {errors.message && (
-          <p id="message-error" className="text-sm text-[#ff9aa6]">
+          <p id="message-error" className="text-sm text-[#b42a41]">
             {errors.message}
           </p>
         )}
       </div>
 
       {/* Honeypot: hidden from people, tempting to bots. */}
-      <div className="absolute -left-[9999px]" aria-hidden="true">
+      <div className="sr-only" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
 
       {status === "error" && (
-        <div role="alert" className="flex items-start gap-3 rounded-2xl border border-[#ff7a8a]/40 bg-[#ff7a8a]/10 p-4 text-sm text-paper">
-          <WarningCircle weight="fill" className="mt-0.5 size-5 shrink-0 text-[#ff9aa6]" />
+        <div role="alert" className="flex items-start gap-3 rounded-2xl border border-[#c8324a]/30 bg-[#c8324a]/[0.06] p-4 text-sm text-ink">
+          <WarningCircle weight="fill" className="mt-0.5 size-5 shrink-0 text-[#b42a41]" />
           <p>
             {serverError} You can also email us directly at{" "}
             <a href={`mailto:${site.email}`} className="underline">

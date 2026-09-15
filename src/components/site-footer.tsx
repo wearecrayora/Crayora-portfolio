@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
 import { ArrowUp } from "@phosphor-icons/react";
@@ -41,8 +41,9 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <div ref={root} className="relative h-[100svh] min-h-[640px]" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}>
-      <footer className="fixed inset-x-0 bottom-0 flex h-[100svh] min-h-[640px] flex-col justify-between overflow-hidden bg-navy pt-24 md:pt-28">
+    // Large screens: curtain reveal (footer fixed under the page). Smaller screens: a normal footer, so nothing is cut off.
+    <div ref={root} className="relative lg:h-[100svh] lg:min-h-[640px]" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}>
+      <footer className="relative flex flex-col justify-between gap-16 overflow-hidden lg:fixed lg:inset-x-0 lg:bottom-0 lg:h-[100svh] lg:min-h-[640px] lg:gap-0 bg-[linear-gradient(180deg,rgb(246_242_236/0.7)_0%,rgb(214_204_255/0.55)_100%)] pt-24 backdrop-blur-2xl md:pt-28">
         <div className="shell grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <p className="font-display text-3xl font-bold tracking-tight md:text-4xl">Say hello.</p>
@@ -72,7 +73,7 @@ export function SiteFooter() {
               <ul className="mt-4 flex flex-col gap-2">
                 {services.map((s) => (
                   <li key={s.key}>
-                    <TransitionLink href={`/services/${s.slug}`} className="text-paper/85 transition-colors hover:text-paper">
+                    <TransitionLink href={`/services/${s.slug}`} className="text-ink/85 transition-colors hover:text-ink">
                       <ScrambleText text={s.name} />
                     </TransitionLink>
                   </li>
@@ -84,7 +85,7 @@ export function SiteFooter() {
               <ul className="mt-4 flex flex-col gap-2">
                 {[...navLinks, { label: "Contact", href: "/contact" }].map((l) => (
                   <li key={l.href}>
-                    <TransitionLink href={l.href} className="text-paper/85 transition-colors hover:text-paper">
+                    <TransitionLink href={l.href} className="text-ink/85 transition-colors hover:text-ink">
                       <ScrambleText text={l.label} />
                     </TransitionLink>
                   </li>
@@ -96,7 +97,7 @@ export function SiteFooter() {
               <ul className="mt-4 flex flex-col gap-2">
                 {site.socials.map((s) => (
                   <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="text-paper/85 transition-colors hover:text-paper">
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="text-ink/85 transition-colors hover:text-ink">
                       <ScrambleText text={s.label} />
                     </a>
                   </li>
@@ -114,15 +115,15 @@ export function SiteFooter() {
             <button
               type="button"
               onClick={() => lenis?.scrollTo(0, { duration: 1.6 })}
-              className="grid size-11 place-items-center rounded-full border border-line-strong text-paper transition-colors hover:bg-paper hover:text-ink"
+              className="grid size-11 place-items-center rounded-full border border-line-strong text-ink transition-colors hover:bg-ink hover:text-canvas"
               aria-label="Back to top"
             >
               <ArrowUp weight="bold" className="size-4" />
             </button>
           </div>
-          <div className="overflow-hidden pb-4">
+          <div className="overflow-hidden pb-24 lg:pb-4">
             <div data-wordmark>
-              <Wordmark className="h-auto w-full text-paper" />
+              <Wordmark className="h-auto w-full text-ink" />
             </div>
           </div>
         </div>

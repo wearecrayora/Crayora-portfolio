@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { Sparkle } from "@/components/brand/logo";
 import { TransitionLink } from "@/components/ui/transition-link";

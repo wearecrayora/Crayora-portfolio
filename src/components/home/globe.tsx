@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef } from "react";
 import createGlobe from "cobe";
@@ -27,7 +27,7 @@ export function Globe({ active, className }: { active: CountryCode; className?: 
     const markers = countries.flatMap((c) =>
       c.markers.map((m) => ({ location: m.location, size: c.code === active ? 0.09 : 0.045 })),
     );
-    globeRef.current?.update({ markers: [...markers, { location: HQ, size: 0.07, color: [1, 1, 1] }] });
+    globeRef.current?.update({ markers: [...markers, { location: HQ, size: 0.07, color: [0.05, 0.07, 0.16] }] });
   }, [active]);
 
   useEffect(() => {
@@ -46,18 +46,19 @@ export function Globe({ active, className }: { active: CountryCode; className?: 
       height: size,
       phi,
       theta,
-      dark: 1,
-      diffuse: 1.4,
+      // Light globe: white sphere, navy-grey land dots, indigo arcs and markers.
+      dark: 0,
+      diffuse: 1.2,
       mapSamples: 18000,
-      mapBrightness: 5.5,
+      mapBrightness: 2.2,
       mapBaseBrightness: 0.02,
-      baseColor: [0.16, 0.19, 0.38],
-      markerColor: [0.58, 0.55, 1],
-      glowColor: [0.2, 0.17, 0.75],
+      baseColor: [1, 1, 1],
+      markerColor: [0.29, 0.25, 1],
+      glowColor: [0.91, 0.91, 0.94],
       opacity: 0.95,
       markers: countries.flatMap((c) => c.markers.map((m) => ({ location: m.location, size: 0.05 }))),
       arcs: countries.flatMap((c) => c.markers.map((m) => ({ from: HQ, to: m.location }))),
-      arcColor: [0.58, 0.55, 1],
+      arcColor: [0.29, 0.25, 1],
       arcWidth: 0.6,
       arcHeight: 0.28,
       markerElevation: 0.01,
@@ -67,7 +68,7 @@ export function Globe({ active, className }: { active: CountryCode; className?: 
     const markers = countries.flatMap((c) =>
       c.markers.map((m) => ({ location: m.location, size: c.code === activeRef.current ? 0.09 : 0.045 })),
     );
-    globe.update({ markers: [...markers, { location: HQ, size: 0.07, color: [1, 1, 1] }] });
+    globe.update({ markers: [...markers, { location: HQ, size: 0.07, color: [0.05, 0.07, 0.16] }] });
 
     const tick = () => {
       if (!visible) return;

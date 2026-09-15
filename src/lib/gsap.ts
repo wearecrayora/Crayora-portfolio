@@ -14,6 +14,8 @@ if (typeof window !== "undefined") {
   CustomEase.create("crayora", "0.76, 0, 0.24, 1");
   CustomEase.create("crayora-out", "0.16, 1, 0.3, 1");
   gsap.defaults({ ease: "crayora-out", duration: 1 });
+  // Mobile browsers resize the viewport as the address bar shows and hides; don't re-measure for that.
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 export const prefersReducedMotion = () =>

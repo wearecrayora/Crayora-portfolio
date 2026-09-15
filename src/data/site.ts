@@ -1,8 +1,5 @@
-﻿const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+// Production domain. Override with NEXT_PUBLIC_SITE_URL (e.g. for a staging deploy).
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://crayoratech.com";
 
 export const site = {
   name: "Crayora",
@@ -28,10 +25,13 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/jyotiranjan-sahoo595",
   },
   socials: [
-    { label: "Instagram", href: "https://www.instagram.com/jyotiranjan_x04/" },
+    { label: "Instagram", href: "https://www.instagram.com/wearecrayora/" },
+    { label: "Facebook", href: "https://www.facebook.com/people/Wearecrayora/61594198913749/" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/jyotiranjan-sahoo595" },
     { label: "GitHub", href: "https://github.com/wearecrayora" },
   ],
+  instagram: "https://www.instagram.com/wearecrayora/",
+  facebook: "https://www.facebook.com/people/Wearecrayora/61594198913749/",
 } as const;
 
 export const navLinks = [

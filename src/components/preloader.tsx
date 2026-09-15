@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
@@ -89,7 +89,7 @@ export function Preloader() {
   return (
     <div
       ref={root}
-      className="preloader fixed inset-0 z-[100] flex items-center justify-center bg-ink"
+      className="preloader fixed inset-0 z-[100] flex items-center justify-center bg-canvas"
       style={{ clipPath: "inset(0% 0% 0% 0%)" }}
       aria-hidden="true"
     >
@@ -97,8 +97,8 @@ export function Preloader() {
         <path
           data-c
           d={MARK_C_PATH}
-          fill="var(--color-paper)"
-          stroke="var(--color-paper)"
+          fill="var(--color-ink)"
+          stroke="var(--color-ink)"
           strokeWidth={3}
           fillRule="evenodd"
         />
@@ -111,7 +111,7 @@ export function Preloader() {
       <div
         data-meta
         data-counter
-        className="absolute bottom-4 right-4 font-display text-6xl font-extrabold tabular-nums tracking-tighter text-paper sm:right-8 sm:text-8xl"
+        className="absolute bottom-4 right-4 font-display text-6xl font-extrabold tabular-nums tracking-tighter text-ink sm:right-8 sm:text-8xl"
       >
         000
       </div>

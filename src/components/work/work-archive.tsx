@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Flip, gsap, ScrollTrigger } from "@/lib/gsap";
@@ -67,7 +67,7 @@ export function WorkArchive() {
 
   return (
     <div>
-      <div className="sticky top-16 z-20 -mx-4 border-b border-line bg-ink/80 px-4 py-4 backdrop-blur-xl transition-[top] duration-500 ease-[var(--ease-crayora)] md:top-[4.5rem] md:mx-0 md:px-0 [html[data-header=hidden]_&]:top-0">
+      <div className="sticky top-16 z-20 -mx-4 border-b border-white/70 bg-canvas/55 px-4 py-4 backdrop-blur-2xl backdrop-saturate-150 transition-[top] duration-500 ease-[var(--ease-crayora)] md:top-[4.5rem] md:mx-0 md:px-0 [html[data-header=hidden]_&]:top-0">
         <div className="flex flex-col gap-3">
           <div role="group" aria-label="Filter by country" className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:pb-0">
             {(["all", ...countries.map((c) => c.code)] as CountryFilter[]).map((code) => {
@@ -81,7 +81,7 @@ export function WorkArchive() {
                   onClick={() => change(code)}
                   className={cn(
                     "flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-colors duration-300",
-                    selected ? "border-indigo bg-indigo text-white" : "border-line-strong text-mute hover:border-paper hover:text-paper",
+                    selected ? "border-indigo bg-indigo text-white" : "border-line-strong text-mute hover:border-ink hover:text-ink",
                   )}
                 >
                   {label}

@@ -68,15 +68,15 @@ export function Studio() {
       <h2 id="studio-title" className="sr-only">
         The studio
       </h2>
-      <p data-manifesto className="max-w-[26ch] font-display text-3xl font-bold leading-[1.12] tracking-tight text-paper sm:text-4xl md:text-6xl">
+      <p data-manifesto className="max-w-[26ch] font-display text-3xl font-bold leading-[1.12] tracking-tight text-ink sm:text-4xl md:text-6xl">
         {manifesto}
       </p>
 
-      <dl data-stats className="mt-20 grid grid-cols-2 gap-x-6 gap-y-12 md:mt-28 md:grid-cols-4">
+      <dl data-stats className="mt-20 grid grid-cols-2 gap-x-6 gap-y-12 md:mt-28 lg:grid-cols-4">
         {stats.map((stat) => (
           <div data-stat key={stat.label} className="border-t border-line-strong pt-6">
             <dt className="mono-label">{stat.label}</dt>
-            <dd className="mt-3 font-display text-6xl font-extrabold tracking-tighter text-paper md:text-8xl">
+            <dd className="mt-3 font-display text-5xl font-extrabold tracking-tighter text-ink sm:text-6xl lg:text-8xl">
               <span data-count={stat.value}>{stat.value}</span>
               <span className="text-indigo">{stat.suffix}</span>
             </dd>
@@ -86,7 +86,7 @@ export function Studio() {
 
       <p className="mt-14 max-w-[60ch] text-mute">
         Led by{" "}
-        <a href={site.founder.linkedin} target="_blank" rel="noopener noreferrer" className="link-underline text-paper">
+        <a href={site.founder.linkedin} target="_blank" rel="noopener noreferrer" className="link-underline text-ink">
           {site.founder.name}
         </a>
         , full stack developer and designer. Every project is planned, designed and shipped in-house.

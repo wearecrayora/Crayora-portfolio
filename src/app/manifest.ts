@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: site.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#070b1a",
-    theme_color: "#070b1a",
+    background_color: "#f6f2ec",
+    theme_color: "#f6f2ec",
     icons: [
       { src: "/brand/crayora-logo.png", sizes: "512x512", type: "image/png", purpose: "any" },
       { src: "/apple-icon.png", sizes: "180x180", type: "image/png" },

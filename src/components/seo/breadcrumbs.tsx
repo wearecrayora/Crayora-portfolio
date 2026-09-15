@@ -15,12 +15,12 @@ export function Breadcrumbs({ items }: { items: [string, string][] }) {
             return (
               <li key={path} className="flex items-center gap-1.5">
                 {last ? (
-                  <span aria-current="page" className="text-paper">
+                  <span aria-current="page" className="text-ink">
                     {name}
                   </span>
                 ) : (
                   <>
-                    <TransitionLink href={path} className="transition-colors hover:text-paper">
+                    <TransitionLink href={path} className="transition-colors hover:text-ink">
                       {name}
                     </TransitionLink>
                     <CaretRight className="size-3 text-dim" aria-hidden="true" />

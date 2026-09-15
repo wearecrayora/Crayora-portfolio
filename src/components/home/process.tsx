@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -18,8 +18,8 @@ export function Process() {
       const mm = gsap.matchMedia();
       mm.add(
         {
-          desktop: "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-          mobile: "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
+          desktop: "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
+          mobile: "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
         },
         (ctx) => {
           const { desktop } = ctx.conditions as { desktop: boolean };
@@ -72,7 +72,7 @@ export function Process() {
       <div data-steps className="@container relative mt-16 md:mt-24">
         {/* Desktop: a wave that runs through all four stages */}
         <svg
-          className="pointer-events-none absolute left-0 top-0 hidden h-auto w-full md:block"
+          className="pointer-events-none absolute left-0 top-0 hidden h-auto w-full lg:block"
           viewBox="0 0 1000 64"
           aria-hidden="true"
         >
@@ -87,22 +87,22 @@ export function Process() {
           />
         </svg>
         {/* Mobile: a straight rail down the left edge */}
-        <div className="pointer-events-none absolute bottom-0 left-[11px] top-0 w-px bg-line-strong md:hidden" aria-hidden="true">
+        <div className="pointer-events-none absolute bottom-0 left-[11px] top-0 w-px bg-line-strong lg:hidden" aria-hidden="true">
           <div data-path-v className="h-full w-[2px] origin-top bg-indigo" />
         </div>
 
-        <ol className="grid gap-14 md:grid-cols-4 md:gap-0">
+        <ol className="grid gap-14 lg:grid-cols-4 lg:gap-0">
           {process.map((step) => (
-            <li key={step.title} data-step className="relative pl-12 md:px-4 md:pt-[calc(6.4cqw+2.5rem)]">
+            <li key={step.title} data-step className="relative pl-12 lg:px-4 lg:pt-[calc(6.4cqw+2.5rem)]">
               <span
                 data-node
-                className="absolute left-0 top-0 grid size-6 place-items-center text-indigo md:left-[calc(50%-1rem)] md:top-[calc(3.2cqw-1rem)] md:size-8"
+                className="absolute left-0 top-0 grid size-6 place-items-center text-indigo lg:left-[calc(50%-1rem)] lg:top-[calc(3.2cqw-1rem)] lg:size-8"
               >
                 <Sparkle className="size-full" />
               </span>
               <h3 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">{step.title}</h3>
               <p className="mt-4 max-w-[34ch] leading-relaxed text-mute">{step.body}</p>
-              <span className="chip mt-5 !text-paper">{step.output}</span>
+              <span className="chip mt-5 !text-ink">{step.output}</span>
             </li>
           ))}
         </ol>
@@ -112,14 +112,14 @@ export function Process() {
         <h3 className="max-w-[24ch] font-display text-2xl font-bold tracking-tight md:text-3xl">
           Built on tools that scale with you.
         </h3>
-        <ul className="mt-10 grid grid-cols-4 gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line sm:grid-cols-8">
+        <ul className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-8">
           {stackLogos.map((logo) => (
-            <li key={logo.file} data-logo className="group grid aspect-square place-items-center bg-ink">
+            <li key={logo.file} data-logo className="glass group grid aspect-square place-items-center rounded-2xl">
               <span
                 role="img"
                 aria-label={logo.name}
                 title={logo.name}
-                className="logo-mask size-8 text-mute transition-colors duration-300 group-hover:text-paper md:size-10"
+                className="logo-mask size-8 text-mute transition-colors duration-300 group-hover:text-ink md:size-10"
                 style={{ "--logo": `url(/stack/${logo.file}.svg)` } as React.CSSProperties}
               />
             </li>

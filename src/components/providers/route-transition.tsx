@@ -111,7 +111,7 @@ export function RouteTransitionProvider({ children }: { children: React.ReactNod
       {children}
       <div ref={overlay} className="invisible fixed inset-0 z-[90]" aria-hidden="true">
         <div data-panel className="absolute inset-0 bg-indigo" />
-        <div data-panel className="absolute inset-0 bg-navy" />
+        <div data-panel className="absolute inset-0 bg-[linear-gradient(160deg,#f6f2ec_40%,#e4dcff)]" />
         <div data-loader className="absolute inset-0 flex flex-col items-center justify-center gap-5">
           <Sparkle className="size-14 animate-[spin_1.6s_cubic-bezier(0.76,0,0.24,1)_infinite] text-indigo" />
           <span className="mono-label">Loading</span>

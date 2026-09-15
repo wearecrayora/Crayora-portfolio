@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -29,7 +29,7 @@ export function ProjectCard({ project, large, priority }: Props) {
     <TransitionLink href={`/work/${project.slug}`} className="group flex h-full flex-col gap-5">
       <div
         className={cn(
-          "relative overflow-hidden rounded-[var(--radius-panel)] border border-line bg-navy-2",
+          "relative overflow-hidden rounded-[var(--radius-panel)] border border-line bg-surface-2 shadow-[var(--shadow-card)]",
           large ? "aspect-[16/9]" : "aspect-[16/10]",
         )}
       >
@@ -42,7 +42,7 @@ export function ProjectCard({ project, large, priority }: Props) {
           onLoad={() => setLoaded(true)}
           className="object-cover object-top transition-transform duration-[1.2s] ease-[var(--ease-crayora)] group-hover:scale-[1.05]"
         />
-        <span className="absolute bottom-4 right-4 grid size-12 translate-y-3 place-items-center rounded-full bg-paper text-ink opacity-0 transition-all duration-500 ease-[var(--ease-crayora)] group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute bottom-4 right-4 grid size-12 translate-y-3 place-items-center rounded-full bg-ink text-canvas opacity-0 transition-all duration-500 ease-[var(--ease-crayora)] group-hover:translate-y-0 group-hover:opacity-100">
           <ArrowUpRight weight="bold" className="size-5" />
         </span>
       </div>
@@ -73,7 +73,7 @@ export function ProjectCard({ project, large, priority }: Props) {
         // load) under a shimmer instead of blocking on missing bones.
         <div className="relative h-full">
           {card}
-          <div className="absolute inset-0 animate-pulse rounded-[var(--radius-panel)] bg-navy-2" />
+          <div className="absolute inset-0 animate-pulse rounded-[var(--radius-panel)] bg-surface-3" />
         </div>
       }
     >
