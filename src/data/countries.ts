@@ -20,8 +20,10 @@ export const countries: Country[] = [
     markers: [
       { label: "Brahmapur", location: [19.31, 84.79] },
       { label: "Bengaluru", location: [12.97, 77.59] },
+      { label: "Noida", location: [28.63, 77.37] },
     ],
-    blurb: "Home base. Retail, wholesale, pharma, construction and education brands from Odisha to Bengaluru.",
+    blurb:
+      "Home base. Defence academies, retail, wholesale, pharma, construction and education brands from Odisha to Noida and Bengaluru.",
   },
   {
     code: "ae",

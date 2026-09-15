@@ -26,7 +26,50 @@ const img = (slug: string, width: number, height: number) => ({
   height,
 });
 
+// Newest first: this order drives the archive, the country lists and "next project" links.
 export const projects: Project[] = [
+  {
+    slug: "samantroy-academy",
+    title: "Samantroy Academy",
+    year: 2026,
+    country: "in",
+    location: "Berhampur, Odisha",
+    type: "Website",
+    stack: ["Next.js", "React", "Tailwind CSS", "i18n", "Vercel"],
+    summary:
+      "A bilingual website for a Berhampur defence coaching academy running since 2001, built to turn aspirants into free counselling bookings.",
+    about:
+      "Samantroy Academy for Defence Career Studies has prepared students in Brahmapur (Berhampur), Ganjam for defence, police and government jobs since 2001. The site leads with proof: a rotating wall of selections by force and month, followed by guidance on every exam it coaches for, from Army, Navy and Air Force entries to Odisha Police, bank, railway and SSC. Eligibility, physical standards and the seven-stage recruitment process are explained in plain language, and every page points to one action, booking free counselling, with call and WhatsApp always in reach. The whole site switches between English and Odia for students across Odisha.",
+    highlights: [
+      "English and Odia versions of the site with a one-tap language switch in the header.",
+      "A rotating wall of selections showing selected candidates by force and month.",
+      "Exam, eligibility and physical-standards guides that lead into free counselling, calls and WhatsApp.",
+    ],
+    liveUrl: "https://www.samantroyacademy.com/",
+    image: img("samantroy-academy", 1901, 887),
+    featured: true,
+  },
+  {
+    slug: "ssbwings",
+    title: "SSBWINGS",
+    year: 2026,
+    country: "in",
+    location: "Noida, Delhi NCR",
+    type: "Website",
+    stack: ["Next.js", "React", "Tailwind CSS", "Supabase", "Razorpay", "Vercel"],
+    summary:
+      "A website for a Noida SSB interview academy mentored by retired SSB assessors, with online batch enrolment, free mock tests and a gallery of recommended candidates.",
+    about:
+      "SSBWINGS coaches defence aspirants for the five-day Services Selection Board interview from its campus in Sector 62, Noida, with mentors who are retired SSB assessors. The site explains the SSB process and every officer entry, from NDA and CDS to AFCAT, TES and Navy, and lets aspirants check their eligibility and try free OIR and SRT mock tests. Offline and online batches can be booked and paid for on the site, and a wall of honour puts real recommended candidates front and centre.",
+    highlights: [
+      "Course enrolment with Razorpay payments for offline and online batches.",
+      "Free OIR and SRT mock tests, an eligibility finder and guides to every officer entry.",
+      "A wall of honour and recommendation gallery built from real alumni results.",
+    ],
+    liveUrl: "https://www.ssbwings.com/",
+    image: img("ssbwings", 1917, 912),
+    featured: true,
+  },
   {
     slug: "bcr-traders",
     title: "BCR Traders",
@@ -101,7 +144,6 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://edusaarthi-iota.vercel.app/",
     image: img("edusaarthi-india", 1899, 908),
-    featured: true,
   },
   {
     slug: "peckers-chicken",
@@ -176,7 +218,6 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://www.hayatinteriors.com/",
     image: img("hayat-interiors", 1901, 907),
-    featured: true,
   },
   {
     slug: "lemon-studio-dxb",
@@ -403,12 +444,12 @@ export const projectsByCountry = (code: CountryCode) => projects.filter((p) => p
 
 /** Order of the home page reel: spread across countries on purpose. */
 const featuredOrder = [
-  "reveil-fragrance",
+  "samantroy-academy",
+  "ssbwings",
   "lemon-studio-dxb",
   "peckers-chicken",
   "coasis",
-  "hayat-interiors",
-  "edusaarthi-india",
+  "reveil-fragrance",
 ];
 export const featuredProjects = featuredOrder
   .map((slug) => projectBySlug(slug))

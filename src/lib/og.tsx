@@ -2,6 +2,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { widestWordEm } from "./fit-heading";
 
 /**
  * Branded 1200x630 share images (Open Graph + X fallback), rendered at build
@@ -37,9 +38,8 @@ type OgInput = {
 
 /** Largest size (px) that keeps the longest word of the title on one line. */
 function titleSize(title: string, width: number) {
-  const longest = Math.max(...title.split(/\s+/).map((w) => w.length));
   const cap = title.length > 26 ? 66 : title.length > 14 ? 80 : 96;
-  return Math.min(cap, Math.floor(width / (longest * 0.92)));
+  return Math.min(cap, Math.floor(width / (widestWordEm(title) * 1.06)));
 }
 
 // Aurora as a blurred SVG: Satori's CSS radial gradients render with hard edges, resvg's SVG blur does not.
